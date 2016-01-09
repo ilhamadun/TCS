@@ -25,7 +25,8 @@
 #ifndef _TCS_H_
 #define _TCS_H_
 
-enum color_t {RED, GREEN, BLUE};
+enum color_t {RED, GREEN, BLUE, CLEAR};
+enum speed_t {SLOW, MEDIUM, FAST};
 
 class TCS
 {
@@ -35,7 +36,8 @@ private:
 	int read();
 
 public:
-	TCS(int S0, int S1, int S2, int OE, int OUT);
+	TCS(int S0, int S1, int S2, int S3, int OE, int OUT);
+	void setSpeed(speed_t speed);
 	int getColor(color_t color);
 };
 
