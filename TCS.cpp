@@ -120,16 +120,6 @@ void TCS::selectColor(color_t color)
 }
 
 /**
- * Read Color Value
- * 
- * @return output signal period
- */
-int TCS::read()
-{
-	return pulseIn(pinOUT, HIGH);
-}
-
-/**
  * Read Color From Sensor
  * 
  * @param  color 	color to read 	RED, GREEN, BLUE or CLEAR
@@ -138,5 +128,5 @@ int TCS::read()
 int TCS::getColor(color_t color)
 {
 	selectColor(color);
-	return read();
+	return pulseIn(pinOUT, HIGH);
 }
