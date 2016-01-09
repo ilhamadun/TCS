@@ -33,7 +33,6 @@ class TCS
 private:
 	int pinS0, pinS1, pinS2, pinS3, pinOE, pinOUT;
 	void selectColor(color_t color);
-	int read();
 
 public:
 	TCS(int S0, int S1, int S2, int S3, int OE, int OUT);
