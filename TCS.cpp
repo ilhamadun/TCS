@@ -59,6 +59,11 @@ void TCS::setSpeed(speed_t speed)
 {
 	switch (speed)
 	{
+		case OFF:
+			digitalWrite(pinS0, LOW);
+			digitalWrite(pinS1, LOW);
+			break;
+			
 		case SLOW:
 			digitalWrite(pinS0, LOW);
 			digitalWrite(pinS1, HIGH);

@@ -26,7 +26,7 @@
 #define _TCS_H_
 
 enum color_t {RED, GREEN, BLUE, CLEAR};
-enum speed_t {SLOW, MEDIUM, FAST};
+enum speed_t {OFF, SLOW, MEDIUM, FAST};
 
 class TCS
 {
