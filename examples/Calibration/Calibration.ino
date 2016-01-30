@@ -1,5 +1,5 @@
 /**
- * TCS RGB Sensor Library For Arduino
+ * Calibrate the TCS sensor
  * 
  * Copyright (c) 2016 Ilham Imaduddin
  *
@@ -22,31 +22,47 @@
  * THE SOFTWARE.
 */
 
-#ifndef _TCS_H_
-#define _TCS_H_
+#include "TCS.h"
 
-#define		DARKEST 	0
-#define		BRIGHTEST 	1
+TCS tcs(40, 41, 42, 43, 44, 45);
 
-enum color_t {RED, GREEN, BLUE, CLEAR};
-enum speed_t {OFF, SLOW, MEDIUM, FAST};
+void setup() {
+  Serial.begin(9600);
+  tcs.setSpeed(FAST);
 
-class TCS
-{
-private:
-	int pinS0, pinS1, pinS2, pinS3, pinOE, pinOUT;
-	void selectColor(color_t color);
+  // Calibrate for 5000 miliseconds
+  tcs.calibrate(5000);
 
-	// Calibration values
-	int darkest[4];
-	int brightest[4];
+  // Show calibration values
+  Serial.println("Darkest");
 
-public:
-	TCS(int S0, int S1, int S2, int S3, int OE, int OUT);
-	void setSpeed(speed_t speed);
-	void calibrate(long calibrationTime);
-	int getCalibratedValue(byte type, color_t color);
-	int getColor(color_t color);
-};
+  Serial.print("R: ");
+  Serial.print(tcs.getCalibratedValue(DARKEST, RED));
 
-#endif
+  Serial.print("\tG: ");
+  Serial.print(tcs.getCalibratedValue(DARKEST, GREEN));
+
+  Serial.print("\tB: ");
+  Serial.print(tcs.getCalibratedValue(DARKEST, BLUE));
+
+  Serial.print("\tC: ");
+  Serial.println(tcs.getCalibratedValue(DARKEST, CLEAR));
+
+  Serial.println("Brightest");
+
+  Serial.print("R: ");
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, RED));
+
+  Serial.print("\tG: ");
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, GREEN));
+
+  Serial.print("\tB: ");
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, BLUE));
+
+  Serial.print("\tC: ");
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, CLEAR));
+}
+
+void loop() {
+  // Do nothing
+}
