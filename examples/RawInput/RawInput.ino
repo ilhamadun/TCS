@@ -1,5 +1,5 @@
 /**
- * Print RGB value read by TCS sensor
+ * Print raw input read by TCS sensor
  * 
  * Copyright (c) 2016 Ilham Imaduddin
  *
@@ -33,10 +33,12 @@ void setup() {
 
 void loop() {
   Serial.print("R: ");
-  Serial.print(tcs.getColor(RED));
+  Serial.print(tcs.readRawInput(RED));
   Serial.print("\tG: ");
-  Serial.print(tcs.getColor(GREEN));
+  Serial.print(tcs.readRawInput(GREEN));
   Serial.print("\tB: ");
-  Serial.println(tcs.getColor(BLUE));
+  Serial.print(tcs.readRawInput(BLUE));
+  Serial.print("\tC: ");
+  Serial.println(tcs.readRawInput(CLEAR));
   delay(500);
 }

@@ -99,25 +99,25 @@ void TCS::calibrate(long calibrationTime)
 
 	while (millis() - startTime < calibrationTime)
 	{
-		red = getColor(RED);
+		red = readRawInput(RED);
 		if (red > darkest[RED])
 			darkest[RED] = red;
 		else if (red && red < brightest[RED])
 			brightest[RED] = red;
 
-		green = getColor(GREEN);
+		green = readRawInput(GREEN);
 		if (green > darkest[GREEN])
 			darkest[GREEN] = green;
 		else if (green && green < brightest[GREEN])
 			brightest[GREEN] = green;
 		
-		blue = getColor(BLUE);
+		blue = readRawInput(BLUE);
 		if (blue > darkest[BLUE])
 			darkest[BLUE] = blue;
 		else if (blue && blue < brightest[BLUE])
 			brightest[BLUE] = blue;
 
-		clear = getColor(CLEAR);
+		clear = readRawInput(CLEAR);
 		if (clear > darkest[CLEAR])
 			darkest[CLEAR] = clear;
 		else if (clear && clear < brightest[CLEAR])
@@ -183,13 +183,44 @@ void TCS::selectColor(color_t color)
 }
 
 /**
- * Read Color From Sensor
+ * Read Raw Sensor Input
  * 
  * @param  color 	color to read 	RED, GREEN, BLUE or CLEAR
  * @return       	output signal period
  */
-int TCS::getColor(color_t color)
+int TCS::readRawInput(color_t color)
 {
 	selectColor(color);
 	return pulseIn(pinOUT, HIGH);
+}
+
+/**
+ * Read sensor and encode color code
+ *
+ * The value of encoded color code is 8 bit. 0 is black and 0xFF is white.
+ * 
+ * @param  color
+ * @return       8 bit color code
+ */
+byte TCS::readColor(color_t color)
+{
+	unsigned long value = readRawInput(color) - brightest[color] * 255 / darkest[color];
+
+	if (value > 255)
+		value = 255;
+	else if (value < 0)
+		value = 0;
+
+	value = 255 - value;
+	return (byte) value;
+}
+
+/**
+ * Read sensor and return 8 bit grayscale
+ *
+ * @return grayscale
+ */
+byte TCS::readGrayscale()
+{
+	return (readColor(RED) + readColor(GREEN) + readColor(BLUE)) / 3;
 }

@@ -1,5 +1,5 @@
 /**
- * TCS RGB Sensor Library For Arduino
+ * Read sensor and encode to color code
  * 
  * Copyright (c) 2016 Ilham Imaduddin
  *
@@ -22,33 +22,33 @@
  * THE SOFTWARE.
 */
 
-#ifndef _TCS_H_
-#define _TCS_H_
+#include "TCS.h"
 
-#define		DARKEST 	0
-#define		BRIGHTEST 	1
+TCS tcs(40, 41, 42, 43, 44, 45);
 
-enum color_t {RED, GREEN, BLUE, CLEAR};
-enum speed_t {OFF, SLOW, MEDIUM, FAST};
+void setup() {
+  Serial.begin(9600);
+  tcs.setSpeed(FAST);
 
-class TCS
-{
-private:
-	int pinS0, pinS1, pinS2, pinS3, pinOE, pinOUT;
-	void selectColor(color_t color);
+  // Calibrate for 5000 miliseconds
+  tcs.calibrate(5000);
+}
 
-	// Calibration values
-	int darkest[4];
-	int brightest[4];
+void loop() {
+  byte red = tcs.readColor(RED);
+  byte green = tcs.readColor(GREEN);
+  byte blue = tcs.readColor(BLUE);
 
-public:
-	TCS(int S0, int S1, int S2, int S3, int OE, int OUT);
-	void setSpeed(speed_t speed);
-	void calibrate(long calibrationTime);
-	int getCalibratedValue(byte type, color_t color);
-	int readRawInput(color_t color);
-	byte readColor(color_t color);
-	byte readGrayscale();
-};
+  // Write RGB color code
+  Serial.print("Color: #");
+  Serial.print(red, HEX);
+  Serial.print(green, HEX);
+  Serial.print(blue, HEX);
 
-#endif
+  // Write grayscale color
+  byte grayscale = tcs.readGrayscale();
+  Serial.print("\tGrayscale: ");
+  Serial.println(grayscale);
+
+  delay(500);
+}
