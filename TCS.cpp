@@ -132,7 +132,7 @@ void TCS::calibrate(long calibrationTime)
  * @param  	color
  * @return	calibration value
  */
-int TCS::getCalibrationValue(byte type, color_t color)
+int TCS::getCalibratedValue(byte type, color_t color)
 {
 	if (type == DARKEST)
 	{

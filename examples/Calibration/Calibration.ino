@@ -37,30 +37,30 @@ void setup() {
   Serial.println("Darkest");
 
   Serial.print("R: ");
-  Serial.print(tcs.getCalibrationValue(DARKEST, RED));
+  Serial.print(tcs.getCalibratedValue(DARKEST, RED));
 
   Serial.print("\tG: ");
-  Serial.print(tcs.getCalibrationValue(DARKEST, GREEN));
+  Serial.print(tcs.getCalibratedValue(DARKEST, GREEN));
 
   Serial.print("\tB: ");
-  Serial.print(tcs.getCalibrationValue(DARKEST, BLUE));
+  Serial.print(tcs.getCalibratedValue(DARKEST, BLUE));
 
   Serial.print("\tC: ");
-  Serial.println(tcs.getCalibrationValue(DARKEST, CLEAR));
+  Serial.println(tcs.getCalibratedValue(DARKEST, CLEAR));
 
   Serial.println("Brightest");
 
   Serial.print("R: ");
-  Serial.print(tcs.getCalibrationValue(BRIGHTEST, RED));
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, RED));
 
   Serial.print("\tG: ");
-  Serial.print(tcs.getCalibrationValue(BRIGHTEST, GREEN));
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, GREEN));
 
   Serial.print("\tB: ");
-  Serial.print(tcs.getCalibrationValue(BRIGHTEST, BLUE));
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, BLUE));
 
   Serial.print("\tC: ");
-  Serial.print(tcs.getCalibrationValue(BRIGHTEST, CLEAR));
+  Serial.print(tcs.getCalibratedValue(BRIGHTEST, CLEAR));
 }
 
 void loop() {
