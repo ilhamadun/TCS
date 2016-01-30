@@ -125,6 +125,13 @@ void TCS::calibrate(long calibrationTime)
 	}
 }
 
+/**
+ * Manually set the calibration value
+ * 
+ * @param color
+ * @param dark   darkest value
+ * @param bright brightest value
+ */
 void TCS::setCalibrationValue(color_t color, int dark, int bright)
 {
 	darkest[color] = dark;

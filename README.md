@@ -28,6 +28,8 @@ tcs.calibrate(5000);
 ```
 will give you 5000 miliseconds to read the sensor to a white and black object.
 
+You can also use the `setCalibrationValue(color_t color, int dark, int bright)` to manually set the calibration values.
+
 #### Reading The Sensor
 This library allow you to read the sensor and encode it to 8 bit color code. There are three method to read the sensor:
 
