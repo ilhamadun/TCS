@@ -183,7 +183,7 @@ void TCS::selectColor(color_t color)
 }
 
 /**
- * Read Color From Sensor
+ * Read Raw Sensor Input
  * 
  * @param  color 	color to read 	RED, GREEN, BLUE or CLEAR
  * @return       	output signal period
