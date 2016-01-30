@@ -47,6 +47,7 @@ public:
 	void calibrate(long calibrationTime);
 	int getCalibratedValue(byte type, color_t color);
 	int readRawInput(color_t color);
+	byte readColor(color_t color);
 };
 
 #endif

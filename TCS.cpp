@@ -193,3 +193,24 @@ int TCS::readRawInput(color_t color)
 	selectColor(color);
 	return pulseIn(pinOUT, HIGH);
 }
+
+/**
+ * Read sensor and encode color code
+ *
+ * The value of encoded color code is 8 bit. 0 is black and 0xFF is white.
+ * 
+ * @param  color
+ * @return       8 bit color code
+ */
+byte TCS::readColor(color_t color)
+{
+	unsigned long value = readRawInput(color) - brightest[color] * 255 / darkest[color];
+
+	if (value > 255)
+		value = 255;
+	else if (value < 0)
+		value = 0;
+
+	value = 255 - value;
+	return (byte) value;
+}
