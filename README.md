@@ -18,6 +18,14 @@ tcs.setSpeed(speed_t speed);
 ```
 The `setSpeed` method can take `OFF`, `SLOW`, `MEDIUM` and `FAST` parameter. The default is set to `OFF` speed, so the sensor stay in power down mode until you set another speed.
 
+You will need to calibrate the sensor using the `calibrate(long calibrationTime)` method. When the method is called, you should read the sensor to a white and black object.
+
+For example, this method call
+```c++
+tcs.calibrate(5000);
+```
+will give you 5000 miliseconds to read the sensor to a white and black object.
+
 After that you can start reading color:
 ```c++
 tcs.getColor(color_t color);
