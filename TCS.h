@@ -46,7 +46,7 @@ public:
 	void setSpeed(speed_t speed);
 	void calibrate(long calibrationTime);
 	int getCalibratedValue(byte type, color_t color);
-	int getColor(color_t color);
+	int readRawInput(color_t color);
 };
 
 #endif

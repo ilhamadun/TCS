@@ -99,25 +99,25 @@ void TCS::calibrate(long calibrationTime)
 
 	while (millis() - startTime < calibrationTime)
 	{
-		red = getColor(RED);
+		red = readRawInput(RED);
 		if (red > darkest[RED])
 			darkest[RED] = red;
 		else if (red && red < brightest[RED])
 			brightest[RED] = red;
 
-		green = getColor(GREEN);
+		green = readRawInput(GREEN);
 		if (green > darkest[GREEN])
 			darkest[GREEN] = green;
 		else if (green && green < brightest[GREEN])
 			brightest[GREEN] = green;
 		
-		blue = getColor(BLUE);
+		blue = readRawInput(BLUE);
 		if (blue > darkest[BLUE])
 			darkest[BLUE] = blue;
 		else if (blue && blue < brightest[BLUE])
 			brightest[BLUE] = blue;
 
-		clear = getColor(CLEAR);
+		clear = readRawInput(CLEAR);
 		if (clear > darkest[CLEAR])
 			darkest[CLEAR] = clear;
 		else if (clear && clear < brightest[CLEAR])
@@ -188,7 +188,7 @@ void TCS::selectColor(color_t color)
  * @param  color 	color to read 	RED, GREEN, BLUE or CLEAR
  * @return       	output signal period
  */
-int TCS::getColor(color_t color)
+int TCS::readRawInput(color_t color)
 {
 	selectColor(color);
 	return pulseIn(pinOUT, HIGH);
