@@ -39,11 +39,16 @@ void loop() {
   byte green = tcs.readColor(GREEN);
   byte blue = tcs.readColor(BLUE);
 
-  // Write color code
+  // Write RGB color code
   Serial.print("Color: #");
   Serial.print(red, HEX);
   Serial.print(green, HEX);
-  Serial.println(blue, HEX);
+  Serial.print(blue, HEX);
+
+  // Write grayscale color
+  byte grayscale = tcs.readGrayscale();
+  Serial.print("\tGrayscale: ");
+  Serial.println(grayscale);
 
   delay(500);
 }
