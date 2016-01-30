@@ -40,6 +40,11 @@ TCS::TCS(int S0, int S1, int S2, int S3, int OE, int OUT):
 	pinMode(pinOE, OUTPUT);
 	pinMode(pinOUT, INPUT);
 
+	brightest[RED] = 9999;
+	brightest[GREEN] = 9999;
+	brightest[BLUE] = 9999;
+	brightest[CLEAR] = 9999;
+
 	// Set OE in low impedance mode
 	digitalWrite(pinOE, LOW);
 }
@@ -78,6 +83,64 @@ void TCS::setSpeed(speed_t speed)
 			digitalWrite(pinS0, HIGH);
 			digitalWrite(pinS1, HIGH);
 			break;
+	}
+}
+
+/**
+ * Sensor Calibration
+ *
+ * The sensor will read input for calibrationTime miliseconds and save
+ * the highest and lowest value read
+ */
+void TCS::calibrate(long calibrationTime)
+{
+	int red, green, blue, clear;
+	long startTime = millis();
+
+	while (millis() - startTime < calibrationTime)
+	{
+		red = getColor(RED);
+		if (red > darkest[RED])
+			darkest[RED] = red;
+		else if (red && red < brightest[RED])
+			brightest[RED] = red;
+
+		green = getColor(GREEN);
+		if (green > darkest[GREEN])
+			darkest[GREEN] = green;
+		else if (green && green < brightest[GREEN])
+			brightest[GREEN] = green;
+		
+		blue = getColor(BLUE);
+		if (blue > darkest[BLUE])
+			darkest[BLUE] = blue;
+		else if (blue && blue < brightest[BLUE])
+			brightest[BLUE] = blue;
+
+		clear = getColor(CLEAR);
+		if (clear > darkest[CLEAR])
+			darkest[CLEAR] = clear;
+		else if (clear && clear < brightest[CLEAR])
+			brightest[CLEAR] = clear;
+	}
+}
+
+/**
+ * Get calibration value
+ * 
+ * @param  	type
+ * @param  	color
+ * @return	calibration value
+ */
+int TCS::getCalibrationValue(byte type, color_t color)
+{
+	if (type == DARKEST)
+	{
+		return darkest[color];
+	}
+	else
+	{
+		return brightest[color];
 	}
 }
 

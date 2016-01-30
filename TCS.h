@@ -25,6 +25,9 @@
 #ifndef _TCS_H_
 #define _TCS_H_
 
+#define		DARKEST 	0
+#define		BRIGHTEST 	1
+
 enum color_t {RED, GREEN, BLUE, CLEAR};
 enum speed_t {OFF, SLOW, MEDIUM, FAST};
 
@@ -34,9 +37,15 @@ private:
 	int pinS0, pinS1, pinS2, pinS3, pinOE, pinOUT;
 	void selectColor(color_t color);
 
+	// Calibration values
+	int darkest[4];
+	int brightest[4];
+
 public:
 	TCS(int S0, int S1, int S2, int S3, int OE, int OUT);
 	void setSpeed(speed_t speed);
+	void calibrate(long calibrationTime);
+	int getCalibrationValue(byte type, color_t color);
 	int getColor(color_t color);
 };
 
