@@ -45,6 +45,7 @@ public:
 	TCS(int S0, int S1, int S2, int S3, int OE, int OUT);
 	void setSpeed(speed_t speed);
 	void calibrate(long calibrationTime);
+	void setCalibrationValue(color_t color, int dark, int bright);
 	int getCalibratedValue(byte type, color_t color);
 	int readRawInput(color_t color);
 	byte readColor(color_t color);
