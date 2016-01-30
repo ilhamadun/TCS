@@ -214,3 +214,13 @@ byte TCS::readColor(color_t color)
 	value = 255 - value;
 	return (byte) value;
 }
+
+/**
+ * Read sensor and return 8 bit grayscale
+ *
+ * @return grayscale
+ */
+byte TCS::readGrayscale()
+{
+	return (readColor(RED) + readColor(GREEN) + readColor(BLUE)) / 3;
+}
