@@ -26,13 +26,31 @@
 #include "TCS.h"
 
 /**
+ * Empty default constructor
+ *
+ * If you use this to initialize your variable, you need to call setup() method
+ */
+TCS::TCS() {}
+
+/**
  * Initialize TCS Sensor
  *
  * This function receive pin number and set it as IO
  */
-TCS::TCS(int S0, int S1, int S2, int S3, int OE, int OUT):
-	pinS0(S0), pinS1(S1), pinS2(S2), pinS3(S3), pinOE(OE), pinOUT(OUT)
+TCS::TCS(int S0, int S1, int S2, int S3, int OE, int OUT)
 {
+	setup(S0, S1, S2, S3, OE, OUT);
+}
+
+void TCS::setup(int S0, int S1, int S2, int S3, int OE, int OUT)
+{
+	pinS0 = S0;
+	pinS1 = S1;
+	pinS2 = S2;
+	pinS3 = S3;
+	pinOE = OE;
+	pinOUT = OUT;
+
 	pinMode(pinS0, OUTPUT);
 	pinMode(pinS1, OUTPUT);
 	pinMode(pinS2, OUTPUT);

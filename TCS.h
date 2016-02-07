@@ -42,7 +42,9 @@ private:
 	int brightest[4];
 
 public:
+	TCS();
 	TCS(int S0, int S1, int S2, int S3, int OE, int OUT);
+	void setup(int S0, int S1, int S2, int S3, int OE, int OUT);
 	void setSpeed(speed_t speed);
 	void calibrate(long calibrationTime);
 	void setCalibrationValue(color_t color, int dark, int bright);
