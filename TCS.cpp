@@ -156,6 +156,18 @@ void TCS::setCalibrationValue(color_t color, int dark, int bright)
 	brightest[color] = bright;
 }
 
+int* TCS::getCalibratedValue(byte type)
+{
+	if (type == DARKEST)
+	{
+		return darkest;
+	}
+	else
+	{
+		return brightest;
+	}
+}
+
 /**
  * Get calibration value
  * 
