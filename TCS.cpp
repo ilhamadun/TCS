@@ -247,7 +247,7 @@ int TCS::readRawInput(color_t color)
  */
 byte TCS::readColor(color_t color)
 {
-	unsigned long value = readRawInput(color) - brightest[color] * 255 / darkest[color];
+	unsigned long value = (readRawInput(color) - brightest[color]) * 255 / darkest[color];
 
 	if (value > 255)
 		value = 255;
