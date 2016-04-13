@@ -115,6 +115,12 @@ void TCS::calibrate(long calibrationTime)
 	int red, green, blue, clear;
 	long startTime = millis();
 
+	for (int i = 0; i < 4; i++)
+	{
+		brightest[i] = 9999;
+		darkest[i] = 0;
+	}
+
 	while (millis() - startTime < calibrationTime)
 	{
 		red = readRawInput(RED);
@@ -156,15 +162,17 @@ void TCS::setCalibrationValue(color_t color, int dark, int bright)
 	brightest[color] = bright;
 }
 
-int* TCS::getCalibratedValue(byte type)
+void TCS::getCalibratedArray(byte type, int data[4])
 {
 	if (type == DARKEST)
 	{
-		return darkest;
+		for (int i = 0; i < 4; i++)
+			data[i] = darkest[i];
 	}
 	else
 	{
-		return brightest;
+		for (int i = 0; i < 4; i++)
+			data[i] = brightest[i];
 	}
 }
 
